@@ -1,0 +1,170 @@
+<header>
+    <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark py-md-3">
+        <div class="container">
+
+            <a class="navbar-brand" href="/">
+                <img src="/assets/favicon.ico" alt="logo" width="24" height="24" class="d-inline-block align-top">
+                ThinkCorp
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <% if (!locals.user) { %>
+
+                    <!-- Visitor's Navbar -->
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link <%= (locals.active === 'blog') ? 'active' : '' %>" href="#">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <%= (locals.active === 'contact') ? 'active' : '' %>"
+                               href="#">Contact</a>
+                        </li>
+                        <li class="nav-item ms-md-3 mb-3 mb-md-0">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#signupModal">
+                                Sign Up
+                            </button>
+                        </li>
+                        <li class="nav-item ms-md-3">
+                            <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                    data-bs-target="#loginModal">
+                                Log In
+                            </button>
+                        </li>
+
+                        <!-- Social Media Links -->
+                        <li class="nav-item ms-md-4">
+                            <a class="nav-link d-inline-block" href="#" target="_blank" rel="noopener">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a class="nav-link d-inline-block ms-2 ms-md-0" href="#" target="_blank" rel="noopener">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                <% } else { %>
+
+                    <!-- User's Navbar -->
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link <%= (locals.active === 'posts') ? 'active' : '' %>" href="/posts">Posts</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Options
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item <%= (locals.active === 'profile') ? 'active' : '' %>"
+                                       href="/profile">Profile</a></li>
+                                <li><a class="dropdown-item <%= (locals.active === 'settings') ? 'active' : '' %>"
+                                       href="/settings">Settings</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="/logout"><i class="fa fa-sign-out-alt"></i> Log
+                                        out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                <% } %>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<% if (!locals.user) { %>
+
+    <!-- Flash Alert -->
+    <% if (locals.flash && flash.length > 0) { %>
+        <% flash.forEach((message) => { %>
+            <div class="alert alert-danger alert-dismissible fade show fixed-top mt-3 ms-3 d-inline-block w-25"
+                 role="alert">
+                <strong><%= message %></strong> Please try again.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% }); %>
+    <% } %>
+
+    <!-- Sign Up Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signupModalLabel">Sign Up</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="signupForm" action="/users" method="post" enctype="multipart/form-data">
+                        <div class="form-floating mb-3">
+                            <input type="text" id="signupFirstName" class="form-control" name="firstName"
+                                   placeholder="First Name" required>
+                            <label for="signupFirstName" class="form-label">First Name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" id="signupLastName" class="form-control" name="lastName"
+                                   placeholder="Last Name" required>
+                            <label for="signupLastName" class="form-label">Last Name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" id="signupEmail" class="form-control" name="email" placeholder="Email"
+                                   required>
+                            <label for="signupEmail" class="form-label">Email</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" id="signupPassword" class="form-control" name="password"
+                                   placeholder="Password" required>
+                            <label for="signupPassword" class="form-label">Password</label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="profile" class="form-label">Profile Photo</label>
+                            <input class="form-control" type="file" accept="image/jpeg,image/png,image/webp"
+                                   id="profile" name="profile">
+                        </div>
+
+                        <button type="submit" class="btn btn-lg btn-primary w-100" form="signupForm">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Log In Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Log In</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm" action="/login" method="post">
+                        <div class="form-floating mb-3">
+                            <input type="text" id="loginEmail" class="form-control" name="email" placeholder="Email"
+                                   required>
+                            <label for="loginEmail" class="form-label">Email</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" id="loginPassword" class="form-control" name="password"
+                                   placeholder="Password" required>
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <a class="link-danger text-decoration-none" href="#">Forgot password?</a>
+                        </div>
+
+                        <button type="submit" class="btn btn-lg btn-info w-100" form="loginForm">Log In</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<% } %>

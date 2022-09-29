@@ -1,0 +1,15 @@
+{
+  "name": "Node.js/Express Template",
+  "short_name": "Alectrify - Bootstrap Node.js/Express Template",
+  "icons": [
+    {
+      "src": "public/assets/favicon.ico",
+      "sizes": "16x16",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/?utm_source=a2hs",
+  "theme_color": "#ffcc33",
+  "background_color": "#ffcc33",
+  "display": "standalone"
+}

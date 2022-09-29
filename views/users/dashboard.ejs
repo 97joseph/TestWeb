@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <%- include('../layouts/head'); %>
+
+    <title>ThinkCorp - Home</title>
+</head>
+
+<body>
+<%- include('../layouts/navbar'); %>
+
+<!-- Flash Alert -->
+<% if (flash.length > 0) { %>
+    <div class="alert alert-danger alert-dismissible fade show fixed-top mt-3 ms-3 d-inline-block w-md-25"
+         role="alert">
+        <strong><%= flash %></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %>
+
+<main>
+    <!-- Hero Section -->
+    <section id="hero" class="text-center bg-light py-md-4">
+        <div class="container py-4 py-md-5">
+            <h1 class="text-primary font-slab">
+                <i class="bi bi-cart3"></i>
+                Greetings, <%= `${user.firstName} ${user.lastName}` %>
+            </h1>
+            <p class="lead my-3">
+                Welcome to your dashboard.
+            </p>
+        </div>
+    </section>
+
+    <!-- Actions Section -->
+    <section id="actions" class="bg-primary text-dark">
+        <div class="container py-4 py-md-5">
+            <h1>
+                <i class="fa fa-location-arrow"></i>
+                Actions
+            </h1>
+
+            <div class="row">
+                <div class="col-md-9">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin efficitur fringilla sapien sed
+                        posuere.
+                        Aenean arcu tellus, pellentesque id tristique eget, pretium vel metus. Mauris eu mi mauris.
+                        Fusce ac
+                        laoreet dui. Fusce vitae velit nunc.
+                    </p>
+                    <ul>
+                        <li>
+                            <a href="#" class="link-dark">Lorem ipsum dolor</a>
+                        </li>
+                        <li>
+                            <a href="#" class="link-dark">Lorem ipsum dolor</a>
+                        </li>
+                        <li>
+                            <a href="#" class="link-dark">Lorem ipsum dolor</a>
+                        </li>
+                        <li>
+                            <a href="#" class="link-dark">Lorem ipsum dolor</a>
+                        </li>
+                        <li>
+                            <a href="#" class="link-dark">Lorem ipsum dolor</a>
+                        </li>
+                        <li>
+                            <a href="#" class="link-dark">Lorem ipsum dolor</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <img src="/assets/idea.png" alt="" class="w-100">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section id="statistics" class="bg-info text-light">
+        <div class="container py-4 py-md-5">
+            <h1>
+                <i class="fa fa-chart-bar"></i>
+                Statistics
+            </h1>
+
+            <div class="row">
+                <div class="col-md-9">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin efficitur fringilla sapien sed
+                        posuere.
+                        Aenean arcu tellus, pellentesque id tristique eget, pretium vel metus. Mauris eu mi mauris.
+                        Fusce ac
+                        laoreet dui. Fusce vitae velit nunc.
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <img src="/assets/meeting.png" alt="" class="w-100">
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<%- include('../layouts/footer'); %>
+
+<!-- Bundled JS: Bootstrap, jQuery, Lodash -->
+<script src="/scripts/bundle.js"></script>
+
+<!-- Custom JavaScript -->
+</body>
+</html>
